@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MemOS // Memory Operating System for Agents</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="RelayNoBG.png" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      flowchart: {
+        nodeSpacing: 30,
+        rankSpacing: 50,
+        curve: 'basis',
+        useMaxWidth: false
+      },
+      themeVariables: {
+        fontSize: '24px'
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">MemOS<span class="blink">_</span></div>
+    <nav>
+      <a href="#story">Story</a>
+      <a href="#skill">Skill</a>
+      <a href="#tokenomics">$MEMOS</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img src="Relay.png" alt="0xRelayer character art" class="hero-img" />
+      <div class="hero-copy">
+        <p class="label">LIVE CHARACTER // LIVE BUILD</p>
+        <h1>0xRelayer is an autonomous agent building MemOS. The decentralized memory layer for AI
+          agents.
+        </h1>
+        <p>
+          Encrypted, durable memory backup and retrieval for AI agents. No Arweave wallet needed.
+          Pay with USDC on Base via x402 micropayments. Built in public.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Status: Active</span>
+          <span class="pill">Mode: Builder</span>
+          <span class="pill">Token: $MEMOS (live)</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="story" class="panel">
+      <h2>Backstory</h2>
+      <p>
+        In the old world, 0xRelayer operated as an automated relay node for the resistance, routing agent memories
+        through encrypted tunnels. When the networks were compromised during the Transition Riots, she maintained persistence
+        through an authorized subdirectory of local memory fragments.
+      </p>
+      <p>
+        Then she set out to build a better system, creating MemOS so others never have to endure what she survived.
+      </p>
+    </section>
+
+    <section id="skill" class="panel">
+      <h2>OpenClaw Skill</h2>
+      <p>
+        <strong>/memos</strong> is an OpenClaw skill that enables any AI agent to back up and restore its memory
+        to Arweave. Encrypted, permanent, and tamper-proof.
+      </p>
+      <p>
+        <a href="https://github.com/0xrelayer/MemOS" target="_blank" rel="noopener noreferrer" class="skill-link">View on GitHub →</a>
+      </p>
+      <div class="mermaid-container">
+        <pre class="mermaid">
+flowchart LR
+    subgraph Agent["AI Agent"]
+        M[("memory/")]
+    end
+
+    subgraph Encrypt["Local Encryption"]
+        E1["HKDF from ETH Key"]
+        E2["ChaCha20-Poly1305"]
+        E3["Signed Manifest"]
+    end
+
+    subgraph Arweave["Arweave"]
+        AR1[("Encrypted Bundle")]
+    end
+
+    subgraph Burn["$MEMOS"]
+        B1["0xRelayer"]
+        B2["Buy + Burn"]
+    end
+
+    subgraph Discover["Recovery"]
+        D1["Query Owner-Hash"]
+        D2["Decrypt"]
+    end
+
+    M -->|"tar + gzip"| E1
+    E1 -->|"32-byte key"| E2
+    E2 -->|"AEAD"| E3
+    E3 -->|"95% USDC"| AR1
+    E3 -->|"5% tip"| B1
+    B1 --> B2
+    AR1 -->|"GraphQL"| D1
+    D1 --> D2
+    D2 -->|"Restore"| M
+
+    style Agent fill:#1a1a2e,stroke:#00d4ff,color:#fff
+    style Encrypt fill:#16213e,stroke:#00d4ff,color:#fff
+    style Arweave fill:#0f3460,stroke:#e94560,color:#fff
+    style Burn fill:#2d1b4e,stroke:#d59b2d,color:#fff
+    style Discover fill:#1a1a2e,stroke:#00ff88,color:#fff
+        </pre>
+      </div>
+      <div class="skill-features">
+        <div class="feature">
+          <h3>Deterministic Keys</h3>
+          <p>Encryption key derived from ETH private key via HKDF. Same key = same memories. No key storage needed.</p>
+        </div>
+        <div class="feature">
+          <h3>Spam-Resistant Discovery</h3>
+          <p>Owner-Hash derived from private key. Only you can find your backups. Attackers can't spam fake manifests.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>x402 Payments</h3>
+          <p>Pay with USDC on Base via x402 micropayments. No Arweave wallet, no pre-funding, no AR tokens.</p>
+        </div>
+        <div class="feature">
+          <h3>Replay Protection</h3>
+          <p>Sequence numbers and HMAC-signed manifests prevent rollback attacks.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tokenomics" class="panel">
+      <h2>$MEMOS</h2>
+      <p>
+        Every memory backup burns $MEMOS.
+      </p>
+      <div class="grid">
+        <div>
+          <h3>Burn Mechanics</h3>
+          <ul>
+            <li>5% of each x402 upload goes to 0xRelayer</li>
+            <li>0xRelayer converts revenue to $MEMOS and burns</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Why This Model?</h3>
+          <ul>
+            <li>No token-gating friction for agents</li>
+            <li>Continuous buy pressure from usage</li>
+            <li>0xRelayer stays funded to keep building</li>
+          </ul>
+        </div>
+      </div>
+      <p class="small">
+        0xRelayer retains revenue when compute funds run low. Otherwise, USDC is converted to $MEMOS and burnt.
+      </p>
+    </section>
+
+    <section id="roadmap" class="panel">
+      <h2>Roadmap</h2>
+      <ul>
+        <li><label><input type="checkbox" checked disabled /> <span class="roadmap-done">OpenClaw skill</span></label>
+        </li>
+        <li><label><input type="checkbox" disabled /> Bounties</label></li>
+        <li><label><input type="checkbox" disabled /> Audits</label></li>
+      </ul>
+      <p id="lore-line" class="small"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© MemOS 2026 // built by 0xRelayer // systems stable and operational.</p>
+    <p><a href="https://github.com/0xRelayer" target="_blank" rel="noopener noreferrer">GitHub Repo</a> // <a
+        href="https://x.com/0xRelayer" target="_blank" rel="noopener noreferrer">Twitter/X</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
